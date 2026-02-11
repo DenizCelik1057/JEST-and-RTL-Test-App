@@ -1,20 +1,21 @@
-/** @type {import('jest').Config} */
-module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'jsdom',
+import type { Config } from "jest";
 
-  roots: ['<rootDir>/src'],
-  testMatch: ['**/?(*.)+(spec|test).ts?(x)'],
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
-
-  globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/tsconfig.json',
-    },
+const config: Config = {
+  preset: "ts-jest",
+  testEnvironment: "jsdom",
+  testMatch: ["**/__tests__/**/*.test.ts?(x)"],
+  transform: {
+    "^.+\\.(ts|tsx)$": [
+      "ts-jest",
+      {
+        tsconfig: "tsconfig.jest.json",
+      },
+    ],
   },
-
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   moduleNameMapper: {
-    '\\.(css|scss|sass)$': 'identity-obj-proxy',
-    '\\.(png|jpg|jpeg|gif|svg)$': '<rootDir>/__mocks__/fileMock.js',
+    "\\.(css|less|scss|sass)$": "identity-obj-proxy",
   },
 };
+
+export default config;
