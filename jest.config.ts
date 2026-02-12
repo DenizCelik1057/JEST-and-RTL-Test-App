@@ -2,8 +2,8 @@ import type { Config } from "jest";
 
 const config: Config = {
   preset: "ts-jest",
-  testEnvironment: "jsdom",
-  testMatch: ["**/__tests__/**/*.test.ts?(x)"],
+  testEnvironment: 'jest-environment-jsdom',
+  testMatch: ['**/?(*.)+(spec|test).[jt]s?(x)'],
   transform: {
     "^.+\\.(ts|tsx)$": [
       "ts-jest",
@@ -15,6 +15,7 @@ const config: Config = {
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   moduleNameMapper: {
     "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+    '^server-only$': '<rootDir>/__mocks__/server-only.js',
   },
 };
 
