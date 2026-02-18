@@ -8,7 +8,7 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('textbox', { name: 'Password' })).toBeEmpty();
   await expect(page.locator('form')).toMatchAriaSnapshot(`- button "Login"`);
   await expect(page.getByRole('heading')).toMatchAriaSnapshot(`- heading "Login" [level=1]`);
-  await page.getByRole('textbox', { name: 'Email' }).click();
+  await page.getByTestId('email-input').click();
   await page.getByRole('textbox', { name: 'Email' }).fill('admin@test1.com');
   await page.getByRole('textbox', { name: 'Password' }).click();
   await page.getByRole('textbox', { name: 'Password' }).fill('password');
