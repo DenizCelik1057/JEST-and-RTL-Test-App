@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
 import { signIn } from "next-auth/react"
+import { useState } from "react"
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")
@@ -9,30 +9,33 @@ export default function LoginPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    await signIn("credentials", {
+
+    const res = await signIn("credentials", {
       email,
       password,
-      redirect: false
+      redirect: true,
+      callbackUrl: "/dashboard"
     })
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        data-testid="email-input"
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        data-testid="password-input"
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button data-testid="login-button" type="submit">Login</button>
-    </form>
+    <div>
+      <h1>Login</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          data-testid="email-input"
+          type="email"
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          data-testid="password-input"
+          type="password"
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button data-testid="login-button" type="submit">Login</button>
+      </form>
+    </div>
   )
 }
